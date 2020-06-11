@@ -59,6 +59,30 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
     }
 
     /**
+     * @dev Sets a new fee recipient address.
+     * @param _newFeeRecipient The address allowed to collect transfer fees for transfers.
+     */
+    function setFeeRecipient(address _newFeeRecipient) public onlyFeeController {
+        require(_newFeeRecipient != address(0), "cannot set fee recipient to address zero");
+        address _oldFeeRecipient = feeRecipient;
+        feeRecipient = _newFeeRecipient;
+        emit FeeRecipientSet(_oldFeeRecipient, feeRecipient);
+    }
+
+    /**
+    * @dev Gets a fee for a given value
+    * ex: given feeRate = 200 and feeParts = 1,000,000 then getFeeFor(10000) = 2
+    * @param _value The amount to get the fee for.
+    */
+    function getFeeFor(uint256 _value) public view returns (uint256) {
+        if (feeRate == 0) {
+            return 0;
+        }
+
+        return _value.mul(feeRate).div(feeParts);
+    }
+
+    /**
     * @dev Transfer token to a specified address from msg.sender
     * Transfer additionally sends the fee to the fee controller
     * Note: the use of Safemath ensures that _value is nonnegative.
