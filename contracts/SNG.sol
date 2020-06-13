@@ -1,5 +1,7 @@
 pragma solidity ^0.6.2;
 
+// SPDX-License-Identifier: UNLICENSED
+
 import "../node_modules/@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol";
 import "../node_modules/@openzeppelin/contracts-ethereum-package/contracts/presets/ERC20PresetMinterPauser.sol";
 
@@ -16,6 +18,8 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
     uint256 public feeRate;
     address public feeController;
     address public feeRecipient;
+    address public owner;
+    mapping(address => bool) internal frozen;
 
     // FEE CONTROLLER EVENTS
     event FeeCollected(address indexed from, address indexed to, uint256 value);
@@ -35,16 +39,72 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
         address indexed newFeeRecipient
     );
 
+    // ASSET PROTECTION EVENTS
+    event AddressFrozen(address indexed addr);
+    event AddressUnfrozen(address indexed addr);
+    event FrozenAddressWiped(address indexed addr);
+    event AssetProtectionRoleSet (
+        address indexed oldAssetProtectionRole,
+        address indexed newAssetProtectionRole
+    );
+
     // After calling the initialize function, this function should be called next
     function init() public {
       feeRate = 0;
       feeController = msg.sender;
       feeRecipient = msg.sender;
+      owner = msg.sender;
     }
 
     modifier onlyFeeController() {
       require(msg.sender == feeController, "only FeeController");
       _;
+    }
+
+    modifier onlyOwner() {
+      require(msg.sender == owner, "only FeeController");
+      _;
+    }
+
+    /**
+     * @dev Freezes an address balance from being transferred.
+     * @param _addr The new address to freeze.
+     */
+    function freeze(address _addr) public onlyOwner {
+        require(!frozen[_addr], "address already frozen");
+        frozen[_addr] = true;
+        emit AddressFrozen(_addr);
+    }
+
+    /**
+     * @dev Unfreezes an address balance allowing transfer.
+     * @param _addr The new address to unfreeze.
+     */
+    function unfreeze(address _addr) public onlyOwner {
+        require(frozen[_addr], "address already unfrozen");
+        frozen[_addr] = false;
+        emit AddressUnfrozen(_addr);
+    }
+
+    /**
+     * @dev Wipes the balance of a frozen address, burning the tokens
+     * and setting the approval to zero.
+     * @param _addr The new frozen address to wipe.
+     */
+    function wipeFrozenAddress(address _addr) public onlyOwner {
+        require(frozen[_addr], "address is not frozen");
+        uint256 _balance = super.balanceOf(_addr);
+        super.burnFrom(_addr, _balance);
+        emit FrozenAddressWiped(_addr);
+    }
+
+    /**
+    * @dev Gets whether the address is currently frozen.
+    * @param _addr The address to check if frozen.
+    * @return A bool representing whether the given address is frozen.
+    */
+    function isFrozen(address _addr) public view returns (bool) {
+        return frozen[_addr];
     }
 
      /**
@@ -67,6 +127,18 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
         address _oldFeeRecipient = feeRecipient;
         feeRecipient = _newFeeRecipient;
         emit FeeRecipientSet(_oldFeeRecipient, feeRecipient);
+    }
+
+     /**
+     * @dev Sets a new fee controller address.
+     * @param _newFeeController The address allowed to set the fee rate and the fee recipient.
+     */
+    function setFeeController(address _newFeeController) public {
+        require(msg.sender == feeController || msg.sender == owner, "only FeeController or Owner");
+        require(_newFeeController != address(0), "cannot set fee controller to address zero");
+        address _oldFeeController = feeController;
+        feeController = _newFeeController;
+        emit FeeControllerSet(_oldFeeController, feeController);
     }
 
     /**
