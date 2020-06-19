@@ -66,6 +66,21 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
       _;
     }
 
+    function transfer(address to, uint256 _value) public override returns (bool) {
+        require(!frozen[to] && !frozen[msg.sender], "address frozen");
+        uint256 _fee = getFeeFor(_value);
+        uint256 _principle = _value.sub(_fee);
+
+        super.transfer(to, _principle);
+
+        if(_fee > 0){
+            super.transfer(feeRecipient, _fee);
+            emit FeeCollected(msg.sender, feeRecipient, _fee);
+        }
+
+        return true;
+    }
+
     /**
      * @dev Freezes an address balance from being transferred.
      * @param _addr The new address to freeze.

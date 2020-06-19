@@ -1,11 +1,11 @@
 {
   "contracts": {
     "SanuGold": {
-      "address": "0xe982E462b094850F12AF94d21D470e21bE9D0E9C",
-      "constructorCode": "608060405234801561001057600080fd5b50614762806100206000396000f3fe",
-      "bodyBytecodeHash": "1b8c03dc2a57c6e1b36d82811aaa4b0691ce6aeef4fcf47f892c7eecc23b08a1",
-      "localBytecodeHash": "d63b345a7dbd4a1799fd5bb2c59b18f72e67703ea90c3dae3bc9738d6bf7da58",
-      "deployedBytecodeHash": "d63b345a7dbd4a1799fd5bb2c59b18f72e67703ea90c3dae3bc9738d6bf7da58",
+      "address": "0x6eD79Aa1c71FD7BdBC515EfdA3Bd4e26394435cC",
+      "constructorCode": "608060405234801561001057600080fd5b50614977806100206000396000f3fe",
+      "bodyBytecodeHash": "4888ceb6e040f5ae99fa11ddb49cc8286b00e5462571515ba789b4d21b53f34b",
+      "localBytecodeHash": "d82ddc4d0d44d09b3bd69a84bbfe7de04609f4313da450c43e424832e25afbce",
+      "deployedBytecodeHash": "d82ddc4d0d44d09b3bd69a84bbfe7de04609f4313da450c43e424832e25afbce",
       "types": {
         "t_bool": {
           "id": "t_bool",
@@ -31,13 +31,13 @@
           "members": [
             {
               "label": "members",
-              "astId": 502,
+              "astId": 568,
               "type": "t_struct<EnumerableSet.AddressSet>",
               "src": "1655:32:3"
             },
             {
               "label": "adminRole",
-              "astId": 504,
+              "astId": 570,
               "type": "t_bytes32",
               "src": "1697:17:3"
             }
@@ -50,7 +50,7 @@
           "members": [
             {
               "label": "_inner",
-              "astId": 2152,
+              "astId": 2218,
               "type": "t_struct<EnumerableSet.Set>",
               "src": "4644:10:11"
             }
@@ -63,13 +63,13 @@
           "members": [
             {
               "label": "_values",
-              "astId": 1968,
+              "astId": 2034,
               "type": "t_array:dyn<t_bytes32>",
               "src": "1213:17:11"
             },
             {
               "label": "_indexes",
-              "astId": 1972,
+              "astId": 2038,
               "type": "t_mapping<t_uint256>",
               "src": "1364:37:11"
             }
@@ -140,7 +140,7 @@
           "contract": "Initializable",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol",
           "label": "initialized",
-          "astId": 396,
+          "astId": 462,
           "type": "t_bool",
           "src": "757:24:2"
         },
@@ -148,7 +148,7 @@
           "contract": "Initializable",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol",
           "label": "initializing",
-          "astId": 399,
+          "astId": 465,
           "type": "t_bool",
           "src": "876:25:2"
         },
@@ -156,7 +156,7 @@
           "contract": "Initializable",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol",
           "label": "______gap",
-          "astId": 464,
+          "astId": 530,
           "type": "t_array:50<t_uint256>",
           "src": "1982:29:2"
         },
@@ -164,7 +164,7 @@
           "contract": "ContextUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol",
           "label": "__gap",
-          "astId": 389,
+          "astId": 455,
           "type": "t_array:50<t_uint256>",
           "src": "1277:25:1"
         },
@@ -172,7 +172,7 @@
           "contract": "AccessControlUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/AccessControl.sol",
           "label": "_roles",
-          "astId": 509,
+          "astId": 575,
           "type": "t_mapping<t_struct<AccessControlUpgradeSafe.RoleData>>",
           "src": "1727:44:3"
         },
@@ -180,7 +180,7 @@
           "contract": "AccessControlUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/AccessControl.sol",
           "label": "__gap",
-          "astId": 754,
+          "astId": 820,
           "type": "t_array:49<t_uint256>",
           "src": "6927:25:3"
         },
@@ -188,7 +188,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "_balances",
-          "astId": 1164,
+          "astId": 1230,
           "type": "t_mapping<t_uint256>",
           "src": "1481:46:6"
         },
@@ -196,7 +196,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "_allowances",
-          "astId": 1170,
+          "astId": 1236,
           "type": "t_mapping<t_uint256>",
           "src": "1534:69:6"
         },
@@ -204,7 +204,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "_totalSupply",
-          "astId": 1172,
+          "astId": 1238,
           "type": "t_uint256",
           "src": "1610:28:6"
         },
@@ -212,7 +212,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "_name",
-          "astId": 1174,
+          "astId": 1240,
           "type": "t_string",
           "src": "1645:20:6"
         },
@@ -220,7 +220,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "_symbol",
-          "astId": 1176,
+          "astId": 1242,
           "type": "t_string",
           "src": "1671:22:6"
         },
@@ -228,7 +228,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "_decimals",
-          "astId": 1178,
+          "astId": 1244,
           "type": "t_uint8",
           "src": "1699:23:6"
         },
@@ -236,7 +236,7 @@
           "contract": "ERC20UpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol",
           "label": "__gap",
-          "astId": 1673,
+          "astId": 1739,
           "type": "t_array:44<t_uint256>",
           "src": "11045:25:6"
         },
@@ -244,7 +244,7 @@
           "contract": "ERC20BurnableUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Burnable.sol",
           "label": "__gap",
-          "astId": 1754,
+          "astId": 1820,
           "type": "t_array:50<t_uint256>",
           "src": "1443:25:7"
         },
@@ -252,7 +252,7 @@
           "contract": "PausableUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/utils/Pausable.sol",
           "label": "_paused",
-          "astId": 2378,
+          "astId": 2444,
           "type": "t_bool",
           "src": "825:20:12"
         },
@@ -260,7 +260,7 @@
           "contract": "PausableUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/utils/Pausable.sol",
           "label": "__gap",
-          "astId": 2467,
+          "astId": 2533,
           "type": "t_array:49<t_uint256>",
           "src": "2073:25:12"
         },
@@ -268,7 +268,7 @@
           "contract": "ERC20PausableUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Pausable.sol",
           "label": "__gap",
-          "astId": 1819,
+          "astId": 1885,
           "type": "t_array:50<t_uint256>",
           "src": "1130:25:8"
         },
@@ -276,7 +276,7 @@
           "contract": "ERC20PresetMinterPauserUpgradeSafe",
           "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/presets/ERC20PresetMinterPauser.sol",
           "label": "__gap",
-          "astId": 1139,
+          "astId": 1205,
           "type": "t_array:50<t_uint256>",
           "src": "3454:25:5"
         },
@@ -332,25 +332,12 @@
             "contract": "AccessControlUpgradeSafe",
             "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/AccessControl.sol",
             "label": "_roles",
-            "astId": 509,
+            "astId": 575,
             "type": "t_mapping<t_struct<AccessControlUpgradeSafe.RoleData>>",
             "src": "1727:44:3"
           }
         ],
-        "storageDiff": [
-          {
-            "action": "append",
-            "updated": {
-              "index": 22,
-              "contract": "SanuGold",
-              "path": "contracts/SNG.sol",
-              "label": "frozen",
-              "astId": 25,
-              "type": "t_mapping<t_bool>",
-              "src": "819:40:0"
-            }
-          }
-        ]
+        "storageDiff": []
       }
     }
   },
@@ -360,7 +347,7 @@
       {
         "address": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
         "version": "0.1.0",
-        "implementation": "0xe982E462b094850F12AF94d21D470e21bE9D0E9C",
+        "implementation": "0x6eD79Aa1c71FD7BdBC515EfdA3Bd4e26394435cC",
         "admin": "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24",
         "kind": "Upgradeable"
       }
