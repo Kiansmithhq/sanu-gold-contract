@@ -1,1 +1,1 @@
-# sanu-gold-contract
+# Sanu-Gold-Contract
