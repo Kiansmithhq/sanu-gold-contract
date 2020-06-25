@@ -48,14 +48,6 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
         address indexed newAssetProtectionRole
     );
 
-    // After calling the initialize function, this function should be called next
-    function init() public {
-      feeRate = 0;
-      feeController = msg.sender;
-      feeRecipient = msg.sender;
-      owner = msg.sender;
-    }
-
     modifier onlyFeeController() {
       require(msg.sender == feeController, "only FeeController");
       _;
@@ -66,16 +58,54 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
       _;
     }
 
-    function transfer(address to, uint256 _value) public override returns (bool) {
+    // Overriding the initialize function to initialize more variables
+    function initialize(string memory name, string memory symbol)virtual public override{
+        feeRate = 0;
+        feeController = msg.sender;
+        feeRecipient = msg.sender;
+        owner = msg.sender;
+        super.initialize(name, symbol);
+    }
+
+    /**
+    * @dev Transfer token to a specified address from msg.sender
+    * Transfer additionally sends the fee to the fee controller
+    * @param to The address to transfer to.
+    * @param value The amount to be transferred.
+    */
+    function transfer(address to, uint256 value) public override returns (bool) {
         require(!frozen[to] && !frozen[msg.sender], "address frozen");
-        uint256 _fee = getFeeFor(_value);
-        uint256 _principle = _value.sub(_fee);
+        uint256 fee = getFeeFor(value);
+        uint256 principle = value.sub(fee);
 
-        super.transfer(to, _principle);
+        super.transfer(to, principle);
 
-        if(_fee > 0){
-            super.transfer(feeRecipient, _fee);
-            emit FeeCollected(msg.sender, feeRecipient, _fee);
+        if(fee > 0){
+            super.transfer(feeRecipient, fee);
+            emit FeeCollected(msg.sender, feeRecipient, fee);
+        }
+
+        return true;
+    }
+
+    /**
+     * @dev Transfer tokens from one address to another
+     * @param from address The address which you want to send tokens from
+     * @param to address The address which you want to transfer to
+     * @param value uint256 the amount of tokens to be transferred
+     */
+    function transferFrom(address from, address to, uint256 value) public override returns (bool) {
+        require(!frozen[to] && !frozen[msg.sender], "address frozen");
+        require(to != address(0), "cannot transfer to address zero");
+
+        uint256 fee = getFeeFor(value);
+        uint256 principle = value.sub(fee);
+
+        super.transferFrom(from, to, principle);
+
+          if(fee > 0){
+            super.transfer(feeRecipient, fee);
+            emit FeeCollected(msg.sender, feeRecipient, fee);
         }
 
         return true;
@@ -124,6 +154,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
 
      /**
      * @dev Sets a new fee rate.
+     // ex: a fee rate of 200 = 0.02%
      * @param _newFeeRate The new fee rate to collect as transfer fees for transfers.
      */
     function setFeeRate(uint256 _newFeeRate) public onlyFeeController {
@@ -159,26 +190,13 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
     /**
     * @dev Gets a fee for a given value
     * ex: given feeRate = 200 and feeParts = 1,000,000 then getFeeFor(10000) = 2
-    * @param _value The amount to get the fee for.
+    * @param value The amount to get the fee for.
     */
-    function getFeeFor(uint256 _value) public view returns (uint256) {
+    function getFeeFor(uint256 value) public view returns (uint256) {
         if (feeRate == 0) {
             return 0;
         }
 
-        return _value.mul(feeRate).div(feeParts);
+        return value.mul(feeRate).div(feeParts);
     }
-
-    /**
-    * @dev Transfer token to a specified address from msg.sender
-    * Transfer additionally sends the fee to the fee controller
-    * Note: the use of Safemath ensures that _value is nonnegative.
-    * @param _to The address to transfer to.
-    * @param _value The amount to be transferred.
-    */
-    // function transfer(address _to, uint256 _value) public o returns (bool) {
-    //     require(_to != address(0), "cannot transfer to address zero");
-    //     super.transfer(msg.sender, _to, _value);
-    //     return true;
-    // }
 }
