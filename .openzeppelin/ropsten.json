@@ -1,7 +1,7 @@
 {
   "contracts": {
     "SanuGold": {
-      "address": "0x1477eb4966eA51B0c6A819f0F5e829a40dff9623",
+      "address": "0x5ab4E58D11990A8354b06218CcDE2a50de9870c2",
       "constructorCode": "608060405234801561001057600080fd5b50614c28806100206000396000f3fe",
       "bodyBytecodeHash": "86bebd579df0a778100b88a783d5e55d083abcb396973833743fa57f20c0fd75",
       "localBytecodeHash": "75f3df9800d6bfa5b5a7c4f7889c532cf889509568493bae818b5ae7f90c9f84",
@@ -326,31 +326,7 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": [],
-        "storageUncheckedVars": [
-          {
-            "contract": "AccessControlUpgradeSafe",
-            "path": "node_modules/@openzeppelin/contracts-ethereum-package/contracts/access/AccessControl.sol",
-            "label": "_roles",
-            "astId": 668,
-            "type": "t_mapping<t_struct<AccessControlUpgradeSafe.RoleData>>",
-            "src": "1727:44:3"
-          }
-        ],
-        "storageDiff": [
-          {
-            "action": "append",
-            "updated": {
-              "index": 22,
-              "contract": "SanuGold",
-              "path": "contracts/SNG.sol",
-              "label": "frozen",
-              "astId": 25,
-              "type": "t_mapping<t_bool>",
-              "src": "819:40:0"
-            }
-          }
-        ]
+        "uninitializedBaseContracts": []
       }
     }
   },
@@ -358,17 +334,10 @@
   "proxies": {
     "SANU gold/SanuGold": [
       {
-        "address": "0x9de71b20b949C4bc3B4C177EB7bFA1A712970f9e",
+        "address": "0xd70FAB63b0D8e627DD2c93387D766D24EC3c3E38",
         "version": "0.1.0",
-        "implementation": "0x016D0A36817415b2908c2C784809479266F0e887",
-        "admin": "0x49f20F6C4ed92A5ef8D7126327Ab9bD0543482eb",
-        "kind": "Upgradeable"
-      },
-      {
-        "address": "0x45F53Ede9B3C55a1EFFDb84f538a61A6b8f17A1c",
-        "version": "0.1.0",
-        "implementation": "0x1477eb4966eA51B0c6A819f0F5e829a40dff9623",
-        "admin": "0x49f20F6C4ed92A5ef8D7126327Ab9bD0543482eb",
+        "implementation": "0x5ab4E58D11990A8354b06218CcDE2a50de9870c2",
+        "admin": "0x479BA3C9C3a5Ba585744C8034E1276EC05cB8F71",
         "kind": "Upgradeable"
       }
     ]
@@ -376,6 +345,6 @@
   "manifestVersion": "2.2",
   "version": "0.1.0",
   "proxyAdmin": {
-    "address": "0x49f20F6C4ed92A5ef8D7126327Ab9bD0543482eb"
+    "address": "0x479BA3C9C3a5Ba585744C8034E1276EC05cB8F71"
   }
 }

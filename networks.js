@@ -15,5 +15,9 @@ module.exports = {
       provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${projectId}`),
       networkId: 5,
     },
+    ropsten: {
+      provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${projectId}`),
+      networkId: 3,
+    },
   },
 };
