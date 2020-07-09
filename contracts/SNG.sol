@@ -2,8 +2,8 @@ pragma solidity ^0.6.2;
 
 // SPDX-License-Identifier: UNLICENSED
 
-import "../node_modules/@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol";
-import "../node_modules/@openzeppelin/contracts-ethereum-package/contracts/presets/ERC20PresetMinterPauser.sol";
+import "../base/contracts/Initializable.sol";
+import "../base/contracts/presets/ERC20PresetMinterPauser.sol";
 
 contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
 
@@ -188,10 +188,6 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
     * @param value The amount to get the fee for.
     */
     function getFeeFor(uint256 value) public view returns (uint256) {
-        if (feeRate == 0) {
-            return 0;
-        }
-
         return value.mul(feeRate).div(FEE_PARTS);
     }
 }
