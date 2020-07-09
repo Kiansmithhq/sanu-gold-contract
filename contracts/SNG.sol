@@ -5,6 +5,7 @@ pragma solidity ^0.6.2;
 import "../base/contracts/Initializable.sol";
 import "../base/contracts/presets/ERC20PresetMinterPauser.sol";
 
+
 contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
 
     // FEE CONTROLLER DATA
@@ -49,17 +50,17 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
     );
 
     modifier onlyFeeController() {
-      require(msg.sender == feeController, "only FeeController");
-      _;
+        require(msg.sender == feeController, "only FeeController");
+        _;
     }
 
     modifier onlyOwner() {
-      require(msg.sender == owner, "only Owner");
-      _;
+        require(msg.sender == owner, "only Owner");
+        _;
     }
 
     // Overriding the initialize function to initialize more variables
-    function initialize(string memory name, string memory symbol)virtual public override{
+    function initialize(string memory name, string memory symbol)public virtual override {
         feeController = msg.sender;
         feeRecipient = msg.sender;
         owner = msg.sender;
@@ -79,7 +80,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
 
         super.transfer(to, principle);
 
-        if(fee != 0){
+        if (fee != 0) {
             super.transfer(feeRecipient, fee);
             emit FeeCollected(msg.sender, feeRecipient, fee);
         }
@@ -102,7 +103,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
 
         super.transferFrom(from, to, principle);
 
-          if(fee > 0){
+        if (fee > 0) {
             super.transfer(feeRecipient, fee);
             emit FeeCollected(msg.sender, feeRecipient, fee);
         }
