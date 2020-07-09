@@ -94,7 +94,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
      * @param value uint256 the amount of tokens to be transferred
      */
     function transferFrom(address from, address to, uint256 value) public override returns (bool) {
-        require(!frozen[to] && !frozen[msg.sender], "address frozen");
+        require(!frozen[to] && !frozen[msg.sender] && !frozen[from], "address frozen");
         require(to != address(0), "cannot transfer to address zero");
 
         uint256 fee = getFeeFor(value);
@@ -111,33 +111,29 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
     }
 
     /**
-     * @dev Freezes an address balance from being transferred.
-     * @param _addr The new address to freeze.
+     * @dev Toggle the frozen state of an address
+     * @param _addr The addresss
      */
-    function freeze(address _addr) public onlyOwner {
-        require(!frozen[_addr], "address already frozen");
-        frozen[_addr] = true;
-        emit AddressFrozen(_addr);
-    }
+    function toggleFreeze(address _addr) public onlyOwner {
+        require(_addr != address(0), "cannot set frozen state of address zero");
+        frozen[_addr] = !frozen[_addr];
 
-    /**
-     * @dev Unfreezes an address balance allowing transfer.
-     * @param _addr The new address to unfreeze.
-     */
-    function unfreeze(address _addr) public onlyOwner {
-        require(frozen[_addr], "address already unfrozen");
-        frozen[_addr] = false;
-        emit AddressUnfrozen(_addr);
+        if (!frozen[_addr]) {
+            emit AddressUnfrozen(_addr);
+        } else {
+            emit AddressFrozen(_addr);
+        }
     }
 
     /**
      * @dev Wipes the balance of a frozen address, burning the tokens
      * and setting the approval to zero.
-     * @param _addr The new frozen address to wipe.
+     * @param _addr The frozen address to wipe.
      */
     function wipeFrozenAddress(address _addr) public onlyOwner {
         require(frozen[_addr], "address is not frozen");
         uint256 _balance = super.balanceOf(_addr);
+        super._approve(_addr, msg.sender, _balance);
         super.burnFrom(_addr, _balance);
         emit FrozenAddressWiped(_addr);
     }
