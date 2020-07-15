@@ -103,7 +103,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
 
         super.transferFrom(from, to, principle);
 
-        if (fee > 0) {
+        if (fee != 0) {
             super.transfer(feeRecipient, fee);
             emit FeeCollected(msg.sender, feeRecipient, fee);
         }
