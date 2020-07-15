@@ -95,7 +95,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
      * @param value uint256 the amount of tokens to be transferred
      */
     function transferFrom(address from, address to, uint256 value) public override returns (bool) {
-        require(!frozen[to] && !frozen[msg.sender] && !frozen[from], "address frozen");
+        require(!frozen[to] && !frozen[from], "address frozen");
         require(to != address(0), "cannot transfer to address zero");
 
         uint256 fee = getFeeFor(value);
