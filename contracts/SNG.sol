@@ -158,7 +158,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
         require(_newFeeRate <= FEE_PARTS, "cannot set fee rate above 100%");
         uint256 _oldFeeRate = feeRate;
         feeRate = _newFeeRate;
-        emit FeeRateSet(_oldFeeRate, feeRate);
+        emit FeeRateSet(_oldFeeRate, _newFeeRate);
     }
 
     /**
@@ -169,7 +169,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
         require(_newFeeRecipient != address(0), "cannot set fee recipient to address zero");
         address _oldFeeRecipient = feeRecipient;
         feeRecipient = _newFeeRecipient;
-        emit FeeRecipientSet(_oldFeeRecipient, feeRecipient);
+        emit FeeRecipientSet(_oldFeeRecipient, _newFeeRecipient);
     }
 
      /**
@@ -181,7 +181,7 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
         require(_newFeeController != address(0), "cannot set fee controller to address zero");
         address _oldFeeController = feeController;
         feeController = _newFeeController;
-        emit FeeControllerSet(_oldFeeController, feeController);
+        emit FeeControllerSet(_oldFeeController, _newFeeController);
     }
 
     /**
