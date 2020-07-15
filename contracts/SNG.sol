@@ -117,9 +117,10 @@ contract SanuGold is Initializable, ERC20PresetMinterPauserUpgradeSafe {
      */
     function toggleFreeze(address _addr) public onlyOwner {
         require(_addr != address(0), "cannot set frozen state of address zero");
-        frozen[_addr] = !frozen[_addr];
+        bool froze = !frozen[_addr]
+        frozen[_addr] = froze;
 
-        if (!frozen[_addr]) {
+        if (!froze) {
             emit AddressUnfrozen(_addr);
         } else {
             emit AddressFrozen(_addr);
