@@ -1,7 +1,7 @@
 {
   "contracts": {
     "SanuGold": {
-      "address": "0x77fAa77bdB0C9569176F61F31a101E46fd9E48F1",
+      "address": "0x6ebCD4b1d977e50687b29A8831D78E76818BA09a",
       "constructorCode": "608060405234801561001057600080fd5b50612ada806100206000396000f3fe",
       "bodyBytecodeHash": "b4efb33c8d7d653b12543be4338775f9acde5d9f5809ab875c7852ce022cf1b2",
       "localBytecodeHash": "59397eb1ee93490f5d4570650f5cb77ab60a6e08d85a85e4cc919374f019210e",
@@ -334,10 +334,10 @@
   "proxies": {
     "SANU gold/SanuGold": [
       {
-        "address": "0x6ebCD4b1d977e50687b29A8831D78E76818BA09a",
+        "address": "0xfe3f733569896f14d3bb15da145f177950de3239",
         "version": "0.1.0",
-        "implementation": "0x77fAa77bdB0C9569176F61F31a101E46fd9E48F1",
-        "admin": "0xD1880CCD12fef2e66161616Dd00b79f49C96c686",
+        "implementation": "0x6ebCD4b1d977e50687b29A8831D78E76818BA09a",
+        "admin": "0x71932F40b2017128589004bA510A57D4aa36be11",
         "kind": "Upgradeable"
       }
     ]
@@ -345,6 +345,6 @@
   "manifestVersion": "2.2",
   "version": "0.1.0",
   "proxyAdmin": {
-    "address": "0xD1880CCD12fef2e66161616Dd00b79f49C96c686"
+    "address": "0x71932F40b2017128589004bA510A57D4aa36be11"
   }
 }
