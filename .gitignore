@@ -10,3 +10,6 @@ allFiredEvents
 
 .openzeppelin/dev-*.json
 .openzeppelin/.session
+/artifacts/
+/cache/
+*.prod.json

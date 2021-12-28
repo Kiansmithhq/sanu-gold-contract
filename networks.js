@@ -1,4 +1,4 @@
-const { projectId, mnemonic } = require('./secrets.json');
+const { projectId, mnemonic } = require('./secrets.staging.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
